@@ -8,4 +8,15 @@ Are you asking yourself what the hell FS20 is? Well, here is the answer: FS20 is
 Generally PyFS20 supports all devices of FS20 system. With the sub-packages ``PCE`` and ``PCS`` you can receive or send every command which is supported by the FS20 protocol. There are also the sub-packages ``Switch`` and ``Dimmer``. These are wrappers to have an abstract access to every FS20 switch and dimmer device. Simply use ``Dimmer`` to send commands to FS20 devices which controls your shutters.
 
 #####FS20 PCS
-...
+This sends the command **OFF** to the device address *1234-1234-1111*:
+``` python
+from fs20.pcs import PCS
+from fs20 import util
+
+address = util.address_part_to_byte('1234') + \
+          util.address_part_to_byte('1234') + \
+          util.address_part_to_byte('1111')
+
+pcs = PCS()
+pcs.send_once(address, '\x00')
+```
