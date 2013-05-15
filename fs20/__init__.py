@@ -25,12 +25,15 @@ PyFS20 - easy access to all your FS20 devices.
 
 This package exports the following modules and subpackages:
 
+    command - Holds all possible commands
     pcs     - Handler for device FS20:PCS (radio transmitter)
     util    - Utility module
 """
 
-__all__ = ['pcs',
+__all__ = ['command',
+           'pcs',
            'util']
 
+import fs20.command as command
 import fs20.pcs as pcs
 import fs20.util as util
