@@ -10,13 +10,13 @@ Generally PyFS20 supports all devices of FS20 system. With the sub-packages ``PC
 #####FS20 PCS
 This sends the command ``OFF`` to the device address ``1234-1234-1111``:
 ``` python
+import fs20
 from fs20.pcs import PCS
-from fs20 import util
 
-address = util.address_part_to_byte('1234') + \
-          util.address_part_to_byte('1234') + \
-          util.address_part_to_byte('1111')
+address = fs20.util.address_part_to_byte('1234') + \
+          fs20.util.address_part_to_byte('1234') + \
+          fs20.util.address_part_to_byte('1111')
 
 pcs = PCS()
-pcs.send_once(address, '\x00')
+pcs.send_once(address, fs20.command.ON)
 ```
