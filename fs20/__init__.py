@@ -31,3 +31,6 @@ This package exports the following modules and subpackages:
 
 __all__ = ['pcs',
            'util']
+
+import fs20.pcs as pcs
+import fs20.util as util
