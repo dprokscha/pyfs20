@@ -20,67 +20,134 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# Single byte commands.
-ON = '\x10'
-OFF = '\x00'
-ON_BRIGHTNESS_LEVEL_1 = '\x01'
-ON_BRIGHTNESS_LEVEL_2 = '\x02'
-ON_BRIGHTNESS_LEVEL_3 = '\x03'
-ON_BRIGHTNESS_LEVEL_4 = '\x04'
-ON_BRIGHTNESS_LEVEL_5 = '\x05'
-ON_BRIGHTNESS_LEVEL_6 = '\x06'
-ON_BRIGHTNESS_LEVEL_7 = '\x07'
-ON_BRIGHTNESS_LEVEL_8 = '\x08'
-ON_BRIGHTNESS_LEVEL_9 = '\x09'
-ON_BRIGHTNESS_LEVEL_10 = '\x0a'
-ON_BRIGHTNESS_LEVEL_11 = '\x0b'
-ON_BRIGHTNESS_LEVEL_12 = '\x0c'
-ON_BRIGHTNESS_LEVEL_13 = '\x0d'
-ON_BRIGHTNESS_LEVEL_14 = '\x0e'
-ON_BRIGHTNESS_LEVEL_15 = '\x0f'
-ON_BRIGHTNESS_LEVEL_16 = '\x10'
-ON_LAST_BRIGHTNESS_LEVEL = '\x11'
-TOGGLE = '\x12'
-DIM_UP = '\x13'
-DIM_DOWN = '\x14'
-DIM_UP_AND_DOWN = '\x15'
+"""
+Single byte commands.
+"""
+# Must be send before and after SET_INTERNAL_TIMER.
 CHANGE_INTERNAL_TIMER = '\x16'
+# Dim one level down.
+DIM_DOWN = '\x14'
+# Dim one level up.
+DIM_UP = '\x13'
+# TEST
+DIM_UP_AND_DOWN = '\x15'
+# Can be used to educate an address (does not work for all FS20 devices).
 EDUCATE = '\x17'
-OFF_INTERNAL_TIME_THEN_LAST_BRIGHTNESS_LEVEL = '\x18'
-ON_INTERNAL_TIME = '\x19'
-ON_LAST_BRIGHTNESS_LEVEL_INTERNAL_TIME_THEN_OFF = '\x1a'
+ # Turn off.
+OFF = '\x00'
+# Turn off for internal time, then turn on to last brightness level.
+OFF_FOR_INTERNAL_TIME_THEN_LAST_BRIGHTNESS_LEVEL = '\x18'
+# Turn on (similar to ON_BRIGHTNESS_LEVEL_16).
+ON = '\x10'
+# Turn on, set brightness level to 1 (6,25% minimum).
+ON_BRIGHTNESS_LEVEL_1 = '\x01'
+# Turn on, set brightness level to 2 (12,5%).
+ON_BRIGHTNESS_LEVEL_2 = '\x02'
+# Turn on, set brightness level to 3 (18,75%).
+ON_BRIGHTNESS_LEVEL_3 = '\x03'
+# Turn on, set brightness level to 4 (25%).
+ON_BRIGHTNESS_LEVEL_4 = '\x04'
+# Turn on, set brightness level to 5 (31,25%).
+ON_BRIGHTNESS_LEVEL_5 = '\x05'
+# Turn on, set brightness level to 6 (37,5%).
+ON_BRIGHTNESS_LEVEL_6 = '\x06'
+# Turn on, set brightness level to 7 (43,75%).
+ON_BRIGHTNESS_LEVEL_7 = '\x07'
+# Turn on, set brightness level to 8 (50%).
+ON_BRIGHTNESS_LEVEL_8 = '\x08'
+# Turn on, set brightness level to 9 (56,25%).
+ON_BRIGHTNESS_LEVEL_9 = '\x09'
+# Turn on, set brightness level to 10 (62,5%).
+ON_BRIGHTNESS_LEVEL_10 = '\x0a'
+# Turn on, set brightness level to 11 (68,75%).
+ON_BRIGHTNESS_LEVEL_11 = '\x0b'
+# Turn on, set brightness level to 12 (75%).
+ON_BRIGHTNESS_LEVEL_12 = '\x0c'
+# Turn on, set brightness level to 13 (81,25%).
+ON_BRIGHTNESS_LEVEL_13 = '\x0d'
+# Turn on, set brightness level to 14 (87,5%).
+ON_BRIGHTNESS_LEVEL_14 = '\x0e'
+# Turn on, set brightness level to 15 (93,75%).
+ON_BRIGHTNESS_LEVEL_15 = '\x0f'
+# Turn on, set brightness level to 16 (100% maximum).
+ON_BRIGHTNESS_LEVEL_16 = '\x10'
+# Turn on for internal time to last brightness level, then turn off.
+ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF = '\x1a'
+# Turn on (100%) for internal time to last brightness level, then previous state.
+ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE = '\x1f'
+# Turn on for internal time, then turn off.
+ON_FOR_INTERNAL_TIME_THEN_OFF = '\x19'
+# Turn on for internal time, then previous state.
+ON_FOR_INTERNAL_TIME_THEN_PREVIOUS_STATE = '\x1e'
+# Turn on to last brightness level.
+ON_LAST_BRIGHTNESS_LEVEL = '\x11'
+# Reset to factory settings (does not work for all FS20 devices).
 RESET = '\x1b'
-ON_INTERNAL_TIMER_THEN_PREVIOUS_STATE = '\x1e'
-ON_LAST_BRIGHTNESS_LEVEL_INTERNAL_TIME_THEN_PREVIOUS_STATE = '\x1f'
+# Toggle between off and on (previous state).
+TOGGLE = '\x12'
 
-# Commands with additional byte.
-DIM_IN_TIME_OFF = '\x20'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_1 = '\x21'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_2 = '\x22'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_3 = '\x23'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_4 = '\x24'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_5 = '\x25'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_6 = '\x26'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_7 = '\x27'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_8 = '\x28'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_9 = '\x29'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_10 = '\x2a'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_11 = '\x2b'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_12 = '\x2c'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_13 = '\x2d'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_14 = '\x2e'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_15 = '\x2f'
-DIM_IN_TIME_BRIGHTNESS_LEVEL_16 = '\x30'
-DIM_IN_TIME_LAST_BRIGHTNESS_LEVEL = '\x31'
-DIM_IN_TIME_UP_AND_DOWN = '\x32'
-DIM_UP_THEN_OFF_IN_TIME = '\x33'
+"""
+Commands with additional byte. The additional byte is always a time value. Time
+values between 250 milliseconds and 4 hours, 16 minutes are possible. "fs20.util"
+provides methods to convert time values to their byte representation.
+"""
+# Dim one level down, then turn off after the given time.
 DIM_DOWN_THEN_OFF_IN_TIME = '\x34'
+# Dim to brightness level 1 (6,25%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_1 = '\x21'
+# Dim to brightness level 2 (12,5%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_2 = '\x22'
+# Dim to brightness level 3 (18,75%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_3 = '\x23'
+# Dim to brightness level 4 (25%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_4 = '\x24'
+# Dim to brightness level 5 (31,25%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_5 = '\x25'
+# Dim to brightness level 6 (37,5%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_6 = '\x26'
+# Dim to brightness level 7 (43,75%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_7 = '\x27'
+# Dim to brightness level 8 (50%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_8 = '\x28'
+# Dim to brightness level 9 (56,25%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_9 = '\x29'
+# Dim to brightness level 10 (62,5%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_10 = '\x2a'
+# Dim to brightness level 11 (68,75%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_11 = '\x2b'
+# Dim to brightness level 12 (75%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_12 = '\x2c'
+# Dim to brightness level 13 (81,25%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_13 = '\x2d'
+# Dim to brightness level 14 (87,5%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_14 = '\x2e'
+# Dim to brightness level 15 (93,75%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_15 = '\x2f'
+# Dim to brightness level 16 (100%) in the given time.
+DIM_IN_TIME_BRIGHTNESS_LEVEL_16 = '\x30'
+# Dim up or down to last brightness level in the given time.
+DIM_IN_TIME_LAST_BRIGHTNESS_LEVEL = '\x31'
+# Dim to 0% in the given time.
+DIM_IN_TIME_OFF = '\x20'
+# Dim to last brightness leven, then turn off after the given time.
+DIM_LAST_BRIGHTNESS_LEVEL_THEN_OFF_IN_TIME = '\x32'
+# Dim one level up (to maximum) or down (to minimum) in change, then turn off after the given time.
 DIM_THEN_OFF_IN_TIME = '\x35'
-SET_INTERNAL_TIMER = '\x36'
+# Dim one level up, then turn off after the given time.
+DIM_UP_THEN_OFF_IN_TIME = '\x33'
+# Turn off for given time, then turn on to last brightness level.
 OFF_FOR_TIME_THEN_LAST_BRIGHTNESS_LEVEL = '\x38'
-ON_FOR_TIME_THEN_OFF = '\x39'
+# Turn on (last brightness level) for given time, then turn off.
 ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF = '\x3a'
-SET_INTERNAL_TIMER_DIM_UP = '\x3c'
-SET_INTERNAL_TIMER_DIM_DOWN = '\x3d'
-ON_FOR_TIME_THEN_PREVIOUS_STATE = '\x3e'
+# Turn on (last brightness level) for given time, then previous state.
 ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE = '\x3f'
+# Turn on (100%) for given time, then turn off.
+ON_FOR_TIME_THEN_OFF = '\x39'
+# Turn on (100%) for given time, then previous state.
+ON_FOR_TIME_THEN_PREVIOUS_STATE = '\x3e'
+# Set internal timer (used for single byte commands depends on internal timer).
+SET_INTERNAL_TIMER = '\x36'
+# Set internal timer to dim down.
+SET_INTERNAL_TIMER_DIM_DOWN = '\x3d'
+# Set internal timer to dim up.
+SET_INTERNAL_TIMER_DIM_UP = '\x3c'
