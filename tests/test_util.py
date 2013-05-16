@@ -66,6 +66,10 @@ class TestUtil(unittest.TestCase):
         self.assertFalse(util.is_valid_address_part(1181))
         self.assertFalse(util.is_valid_address_part('1110'))
         self.assertFalse(util.is_valid_address_part(1110))
+        self.assertFalse(util.is_valid_address_part('11'))
+        self.assertFalse(util.is_valid_address_part(11))
+        self.assertFalse(util.is_valid_address_part('11122'))
+        self.assertFalse(util.is_valid_address_part(11122))
 
 
 def get_suite():

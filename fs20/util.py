@@ -134,4 +134,9 @@ def is_valid_address_part(part):
         for i in str(part):
             if not 1 <= int(i) <= 4:
                 return False
-    return True
+        return True
+    return False
+
+
+class InvalidInput(Exception):
+    pass
