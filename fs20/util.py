@@ -69,6 +69,50 @@ def address_part_to_int(part):
         int_value += int(key_code) - 1
     return int_value
 
+def address_to_byte(address):
+    """
+    Converts an address to a byte string.
+
+    Args:
+        address: String which represents a fully qualified address.
+
+    Returns:
+        >>> address_to_byte('1111-1111-4444')
+        '\x00\x00\xff'
+
+    Raises:
+        InvalidInput: If the given address is invalid.
+    """
+    address = str(address).split('-')
+    if 3 == len(address):
+        if (is_valid_address_part(address[0]) and
+            is_valid_address_part(address[1]) and
+            is_valid_address_part(address[2])):
+            return (address_part_to_byte(address[0]) +
+                    address_part_to_byte(address[1]) +
+                    address_part_to_byte(address[2]))
+    raise InvalidInput('Invalid address given (e.g. "1234-1234-1234" expected).')
+
+def byte_to_address(value):
+    """
+    Converts a byte string to an address.
+
+    Args:
+        value: Byte string.
+
+    Returns:
+        >>> byte_to_address('\x00\x00\xff')
+        '1111-1111-4444'
+
+    Raises:
+        InvalidInput: If the given value is invalid.
+    """
+    if 3 == len(str(value)):
+        return '%s-%s-%s' % (byte_to_address_part(value[0]),
+                             byte_to_address_part(value[1]),
+                             byte_to_address_part(value[2]))
+    raise InvalidInput('Invalid address given (3 bytes expected).')
+
 def byte_to_address_part(value):
     """
     Converts a byte string to an address part.
