@@ -29,7 +29,7 @@ CHANGE_INTERNAL_TIMER = '\x16'
 DIM_DOWN = '\x14'
 # Dim one level up.
 DIM_UP = '\x13'
-# Dim up (to maximum) or down (to minimum).
+# Dim stepwise up (to maximum) or down (to minimum).
 DIM = '\x15'
 # Can be used to educate an address (does not work for all FS20 devices).
 EDUCATE = '\x17'
