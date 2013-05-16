@@ -18,7 +18,7 @@ Generally PyFS20 supports all devices of FS20 system. With the modules ``PCE`` a
 ### Modules
 Please have a look inside the code of the modules to get an overview about available methods and what they do. The code is documented pretty well. In this README you only get some basic examples how to use the modules.
 
-##### Command
+##### Command ([view source](fs20/command.py))
 Provides all possible FS20 commands as constants. Please note that not every command is supported by a FS20 device. Have a look at the manual of your FS20 device to get a list of supported commands. This basic example prints the byte representation ``\x10`` of the command ``ON``:
 ``` python
 import fs20
@@ -26,7 +26,7 @@ import fs20
 print fs20.command.ON
 ```
 
-##### PCS
+##### PCS ([view source](fs20/pcs.py))
 This module is a wrapper for FS20 PCS. With ``PCS`` you can send any command to any device. Following example sends the command ``OFF`` to the device address ``1234-1234-1111``:
 ``` python
 import fs20
@@ -40,7 +40,7 @@ pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
 ```
 
-##### Util
+##### Util ([view source](fs20/util.py))
 Holds some generic methods. Most of them handles conversion of FS20 addresses. The following example converts the address part ``4444`` to its byte representation ``\xff``:
 ``` python
 import fs20
