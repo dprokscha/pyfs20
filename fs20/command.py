@@ -29,8 +29,8 @@ CHANGE_INTERNAL_TIMER = '\x16'
 DIM_DOWN = '\x14'
 # Dim one level up.
 DIM_UP = '\x13'
-# TEST
-DIM_UP_AND_DOWN = '\x15'
+# Dim up (to maximum) or down (to minimum).
+DIM = '\x15'
 # Can be used to educate an address (does not work for all FS20 devices).
 EDUCATE = '\x17'
  # Turn off.
@@ -91,46 +91,46 @@ Commands with additional byte. The additional byte is always a time value. Time
 values between 250 milliseconds and 4 hours, 16 minutes are possible. "fs20.util"
 provides methods to convert time values to their byte representation.
 """
+# Dim to brightness level 1 (6,25%) in the given time.
+DIM_BRIGHTNESS_LEVEL_1_IN_TIME = '\x21'
+# Dim to brightness level 2 (12,5%) in the given time.
+DIM_BRIGHTNESS_LEVEL_2_IN_TIME = '\x22'
+# Dim to brightness level 3 (18,75%) in the given time.
+DIM_BRIGHTNESS_LEVEL_3_IN_TIME = '\x23'
+# Dim to brightness level 4 (25%) in the given time.
+DIM_BRIGHTNESS_LEVEL_4_IN_TIME = '\x24'
+# Dim to brightness level 5 (31,25%) in the given time.
+DIM_BRIGHTNESS_LEVEL_5_IN_TIME = '\x25'
+# Dim to brightness level 6 (37,5%) in the given time.
+DIM_BRIGHTNESS_LEVEL_6_IN_TIME = '\x26'
+# Dim to brightness level 7 (43,75%) in the given time.
+DIM_BRIGHTNESS_LEVEL_7_IN_TIME = '\x27'
+# Dim to brightness level 8 (50%) in the given time.
+DIM_BRIGHTNESS_LEVEL_8_IN_TIME = '\x28'
+# Dim to brightness level 9 (56,25%) in the given time.
+DIM_BRIGHTNESS_LEVEL_9_IN_TIME = '\x29'
+# Dim to brightness level 10 (62,5%) in the given time.
+DIM_BRIGHTNESS_LEVEL_10_IN_TIME = '\x2a'
+# Dim to brightness level 11 (68,75%) in the given time.
+DIM_BRIGHTNESS_LEVEL_11_IN_TIME = '\x2b'
+# Dim to brightness level 12 (75%) in the given time.
+DIM_BRIGHTNESS_LEVEL_12_IN_TIME = '\x2c'
+# Dim to brightness level 13 (81,25%) in the given time.
+DIM_BRIGHTNESS_LEVEL_13_IN_TIME = '\x2d'
+# Dim to brightness level 14 (87,5%) in the given time.
+DIM_BRIGHTNESS_LEVEL_14_IN_TIME = '\x2e'
+# Dim to brightness level 15 (93,75%) in the given time.
+DIM_BRIGHTNESS_LEVEL_15_IN_TIME = '\x2f'
+# Dim to brightness level 16 (100%) in the given time.
+DIM_BRIGHTNESS_LEVEL_16_IN_TIME = '\x30'
 # Dim one level down, then turn off after the given time.
 DIM_DOWN_THEN_OFF_IN_TIME = '\x34'
-# Dim to brightness level 1 (6,25%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_1 = '\x21'
-# Dim to brightness level 2 (12,5%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_2 = '\x22'
-# Dim to brightness level 3 (18,75%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_3 = '\x23'
-# Dim to brightness level 4 (25%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_4 = '\x24'
-# Dim to brightness level 5 (31,25%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_5 = '\x25'
-# Dim to brightness level 6 (37,5%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_6 = '\x26'
-# Dim to brightness level 7 (43,75%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_7 = '\x27'
-# Dim to brightness level 8 (50%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_8 = '\x28'
-# Dim to brightness level 9 (56,25%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_9 = '\x29'
-# Dim to brightness level 10 (62,5%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_10 = '\x2a'
-# Dim to brightness level 11 (68,75%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_11 = '\x2b'
-# Dim to brightness level 12 (75%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_12 = '\x2c'
-# Dim to brightness level 13 (81,25%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_13 = '\x2d'
-# Dim to brightness level 14 (87,5%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_14 = '\x2e'
-# Dim to brightness level 15 (93,75%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_15 = '\x2f'
-# Dim to brightness level 16 (100%) in the given time.
-DIM_IN_TIME_BRIGHTNESS_LEVEL_16 = '\x30'
 # Dim up or down to last brightness level in the given time.
-DIM_IN_TIME_LAST_BRIGHTNESS_LEVEL = '\x31'
-# Dim to 0% in the given time.
-DIM_IN_TIME_OFF = '\x20'
+DIM_LAST_BRIGHTNESS_LEVEL_IN_TIME = '\x31'
 # Dim to last brightness leven, then turn off after the given time.
 DIM_LAST_BRIGHTNESS_LEVEL_THEN_OFF_IN_TIME = '\x32'
+# Dim to 0% in the given time.
+DIM_OFF_IN_TIME = '\x20'
 # Dim one level up (to maximum) or down (to minimum) in change, then turn off after the given time.
 DIM_THEN_OFF_IN_TIME = '\x35'
 # Dim one level up, then turn off after the given time.
