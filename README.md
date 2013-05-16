@@ -32,9 +32,7 @@ This module is a wrapper for FS20 PCS. With ``PCS`` you can send any command to 
 import fs20
 from fs20.pcs import PCS
 
-address = fs20.util.address_part_to_byte('1234') + \
-          fs20.util.address_part_to_byte('1234') + \
-          fs20.util.address_part_to_byte('1111')
+address = fs20.util.address_to_byte('1234-1234-1111')
 
 pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
