@@ -173,7 +173,7 @@ class PCS:
         Writes the given data frame to FS20 PCS.
 
         Args:
-            data: Byte string which represents a fully qualified data frame.
+            dataframe: Byte string which represents a fully qualified data frame.
 
         Returns:
             Depends on data frame.
@@ -199,6 +199,7 @@ class PCS:
         Args:
             address: Byte string which represents a fully qualified address.
             command: Byte string which represents a fully qualified command.
+            interval: Interval between 1 and 255 how often the command should be sent.
 
         Returns:
             >>> self.send_multiple('\x00\x00\x00', '\x10')
