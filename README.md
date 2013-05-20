@@ -4,7 +4,7 @@ Easy access to all your FS20 devices.
 ### Contents
 [What the...?](#what-the)  
 [Currently supported devices](#currently-supported-devices)  
-[Installing PyFS20](#installing-pyfs20)
+[Installing PyFS20](#installing-pyfs20)  
 [Modules](#modules)  
 ....[Command](#command)  
 ....[PCS](#pcs)  
@@ -23,7 +23,7 @@ Simply do the following:
 * [Install Python 2.6 (or higher)](http://www.python.org/getit/)
 * [Install PyUSB](https://github.com/walac/pyusb)
 * [Download this package](https://github.com/dprokscha/pyfs20/archive/master.zip)
-* Follow the code examples
+* Follow the code examples in this README
 
 Please note: I didn't tested this package with Python 3.0 (or higher).
 
