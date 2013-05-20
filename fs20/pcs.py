@@ -35,16 +35,16 @@ ENDPOINT_WRITE = 0x01
 # Possible data frames.
 DATAFRAME_SEND_ONCE = '\x01\x06\xf1'
 DATAFRAME_SEND_MULTIPLE = '\x01\x07\xf2'
-DATAFRAME_STOP_BUTTON_PUSH = '\x01\x01\xf3'
+DATAFRAME_STOP_MULTIPLE_SENDING = '\x01\x01\xf3'
 DATAFRAME_VERSION = '\x01\x01\xf0'
 
 # Possible response codes.
-RESPONSE_BUTTON_PUSH_ABORTED = 0x04
-RESPONSE_BUTTON_PUSH_NOT_SENT = 0x05
 RESPONSE_DATAFRAME_UNKNOWN = 0x02
 RESPONSE_DATAFRAME_MISMATCH = 0x03
 RESPONSE_FIRMWARE_REQUEST_OK = 0x01
 RESPONSE_OK = 0x00
+RESPONSE_STOP_MULTIPLE_SENDING_OK = 0x04
+RESPONSE_STOP_MULTIPLE_SENDING_NOT_SENT = 0x05
 
 
 class PCS:
@@ -157,8 +157,8 @@ class PCS:
         except Exception:
             response = ''
         if response[0:3] == array('B', [0x02, 0x03, 0xa0]):
-            if response[3] in [RESPONSE_BUTTON_PUSH_ABORTED,
-                               RESPONSE_BUTTON_PUSH_NOT_SENT,
+            if response[3] in [RESPONSE_STOP_MULTIPLE_SENDING_OK,
+                               RESPONSE_STOP_MULTIPLE_SENDING_NOT_SENT,
                                RESPONSE_FIRMWARE_REQUEST_OK,
                                RESPONSE_OK]:
                 return response[3:5]
@@ -202,13 +202,13 @@ class PCS:
             interval: Interval between 1 and 255 how often the command should be sent.
 
         Returns:
-            >>> self.send_multiple('\x00\x00\x00', '\x10')
+            >>> self.send_multiple('\x00\x00\x00', '\x10', 10)
             '\x00'
         """
         return self._write(DATAFRAME_SEND_MULTIPLE          + \
                            self._get_raw_address(address)   + \
-                           self._get_raw_interval(interval) + \
-                           self._get_raw_command(command))[0]
+                           self._get_raw_command(command)   + \
+                           self._get_raw_interval(interval))[0]
 
     def send_once(self, address, command):
         """
@@ -226,15 +226,15 @@ class PCS:
                            self._get_raw_address(address) + \
                            self._get_raw_command(command))[0]
 
-    def stop_button_push(self):
+    def stop_multiple_sending(self):
         """
-        Stops instantly the button push command.
+        Stops instantly the multiple sending of a command.
 
         Returns:
-            >>> self.stop_button_push()
+            >>> self.stop_multiple_sending()
             '\x04'
         """
-        return self._write(DATAFRAME_STOP_BUTTON_PUSH)[0]
+        return self._write(DATAFRAME_STOP_MULTIPLE_SENDING)[0]
 
 
 class DeviceDataframeMismatch(Exception):
