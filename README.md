@@ -4,6 +4,7 @@ Easy access to all your FS20 devices.
 ### Contents
 [What the...?](#what-the)  
 [Currently supported devices](#currently-supported-devices)  
+[Installing PyFS20](#installing-pyfs20)
 [Modules](#modules)  
 ....[Command](#command)  
 ....[PCS](#pcs)  
@@ -14,6 +15,17 @@ Are you asking yourself what the hell FS20 is? FS20 is a simple but unsecure, un
 
 ### Currently supported devices
 Generally PyFS20 supports all devices of FS20 system. With the modules ``PCE`` and ``PCS`` you can receive or send every command which is supported by the FS20 protocol. There are also the modules ``Switch`` and ``Dimmer``. These are wrappers to have an abstract access to every FS20 switch and dimmer device. Simply use ``Dimmer`` to send commands to FS20 devices which controls your shutters.
+
+### Installing PyFS20
+PyFS20 requires Python 2.6 (or higher) and PyUSB to run properly.
+
+Simply do the following:
+* [Install Python 2.6 (or higher)](http://www.python.org/getit/)
+* [Install PyUSB](https://github.com/walac/pyusb)
+* [Download this package](https://github.com/dprokscha/pyfs20/archive/master.zip)
+* Follow the code examples
+
+Please note: I didn't tested this package with Python 3.0 (or higher).
 
 ### Modules
 Please have a look inside the code of the modules to get an overview about available methods and what they do. The code is documented pretty well. In this README you only get some basic examples how to use the modules.
