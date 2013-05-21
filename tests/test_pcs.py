@@ -44,7 +44,7 @@ class TestPCS(unittest.TestCase):
         self.assertRaises(fs20.pcs.DeviceDataframeMismatch, self._pcs._write, '\x01\x03\xf1\x00\x00\x00\x00')
 
     def test_get_version(self):
-        self.assertEqual(self._pcs.get_version(), 'v1.1')
+        self.assertEqual(self._pcs.get_version(), 'v1.7')
 
     def test_send_multiple(self):
         #self.assertEqual(self._pcs.send_multiple('\x00\x00\x00', fs20.command.DIM_DOWN, 5), fs20.pcs.RESPONSE_OK)

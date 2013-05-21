@@ -189,7 +189,7 @@ class PCS:
             >>> self.get_version()
             'v1.0'
         """
-        version = hex(self._write(DATAFRAME_VERSION)[1])[2:]
+        version = str(self._write(DATAFRAME_VERSION)[1])
         return 'v%s.%s' % (version[0], version[1])
 
     def send_multiple(self, address, command, interval=1):
