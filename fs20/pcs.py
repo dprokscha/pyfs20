@@ -168,18 +168,21 @@ class PCS:
                 raise DeviceDataframeMismatch('Device can not handle data frame.')
         raise DeviceInvalidResponse('Invalid response from device.')
 
-    def _write(self, dataframe):
+    def _write(self, dataframe, with_response=True):
         """
         Writes the given data frame to FS20 PCS.
 
         Args:
             dataframe: Byte string which represents a fully qualified data frame.
+            with_response: Boolean value whether to get a response from the sent command.
 
         Returns:
-            Depends on data frame.
+            Depends from the given data frame.
         """
         self._get_device().write(ENDPOINT_WRITE, dataframe)
-        return self._get_response()
+        if with_response:
+            return self._get_response()
+        return array('B', [RESPONSE_OK, 0])
 
     def get_version(self):
         """
@@ -187,7 +190,7 @@ class PCS:
 
         Returns:
             >>> self.get_version()
-            'v1.0'
+            'v1.7'
         """
         version = str(self._write(DATAFRAME_VERSION)[1])
         return 'v%s.%s' % (version[0], version[1])
@@ -205,10 +208,11 @@ class PCS:
             >>> self.send_multiple('\x00\x00\x00', '\x10', 10)
             '\x00'
         """
-        return self._write(DATAFRAME_SEND_MULTIPLE          + \
-                           self._get_raw_address(address)   + \
-                           self._get_raw_command(command)   + \
-                           self._get_raw_interval(interval))[0]
+        return self._write( DATAFRAME_SEND_MULTIPLE
+                          + self._get_raw_address(address)
+                          + self._get_raw_command(command)
+                          + self._get_raw_interval(interval)
+                          , False)[0]
 
     def send_once(self, address, command):
         """
@@ -222,9 +226,9 @@ class PCS:
             >>> self.send('\x00\x00\x00', '\x10')
             '\x00'
         """
-        return self._write(DATAFRAME_SEND_ONCE            + \
-                           self._get_raw_address(address) + \
-                           self._get_raw_command(command))[0]
+        return self._write( DATAFRAME_SEND_ONCE
+                          + self._get_raw_address(address)
+                          + self._get_raw_command(command))[0]
 
     def stop_multiple_sending(self):
         """
