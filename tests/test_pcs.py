@@ -42,21 +42,23 @@ class TestPCS(unittest.TestCase):
         self.assertEqual(self._pcs._write('\x01\x06\xf1\x00\x00\x00\x00')[0], fs20.pcs.RESPONSE_OK)
         self.assertRaises(fs20.pcs.DeviceDataframeUnknown, self._pcs._write, '\x01\x06\xf5\x00\x00\x00\x00')
         self.assertRaises(fs20.pcs.DeviceDataframeMismatch, self._pcs._write, '\x01\x03\xf1\x00\x00\x00\x00')
+        self.assertEqual(self._pcs._write('\xff\x00', False)[0], fs20.pcs.RESPONSE_OK)
 
     def test_get_version(self):
         self.assertEqual(self._pcs.get_version(), 'v1.7')
 
     def test_send_multiple(self):
-        #self.assertEqual(self._pcs.send_multiple('\x00\x00\x00', fs20.command.DIM_DOWN, 5), fs20.pcs.RESPONSE_OK)
-        #self.assertRaises(fs20.pcs.InvalidInput, self._pcs.send_multiple, '\x00\x00\x00', fs20.command.ON, 0)
-        #self.assertRaises(fs20.pcs.InvalidInput, self._pcs.send_multiple, '\x00\x00\x00', fs20.command.ON, 300)
-        pass
+        self.assertEqual(self._pcs.send_multiple('\x00\x00\x00', fs20.command.DIM_DOWN, 5), fs20.pcs.RESPONSE_OK)
+        self.assertRaises(fs20.pcs.InvalidInput, self._pcs.send_multiple, '\x00\x00\x00', fs20.command.ON, 0)
+        self.assertRaises(fs20.pcs.InvalidInput, self._pcs.send_multiple, '\x00\x00\x00', fs20.command.ON, 300)
 
     def test_send_once(self):
         self.assertEqual(self._pcs.send_once('\x00\x00\x00', fs20.command.ON), fs20.pcs.RESPONSE_OK)
 
     def test_stop_multiple_sending(self):
-       self.assertEqual(self._pcs.stop_multiple_sending(), fs20.pcs.RESPONSE_STOP_MULTIPLE_SENDING_NOT_SENT)
+        self.assertEqual(self._pcs.stop_multiple_sending(), fs20.pcs.RESPONSE_STOP_MULTIPLE_SENDING_NOT_SENT)
+        self.assertEqual(self._pcs.send_multiple('\x00\x00\x00', fs20.command.DIM_DOWN, 100), fs20.pcs.RESPONSE_OK)
+        self.assertEqual(self._pcs.stop_multiple_sending(), fs20.pcs.RESPONSE_STOP_MULTIPLE_SENDING_OK)
 
 
 def get_suite():
