@@ -45,13 +45,16 @@ import fs20
 from fs20.pcs import PCS
 
 address = fs20.util.address_to_byte('1234-1234-1111')
+time = fs20.util.time_string_to_byte('00:00:2.0')
 
 pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
+
+pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME + time)
 ```
 
 ##### Util ([view source](fs20/util.py))
-Holds some generic methods. Most of them handles conversion of FS20 addresses. The following example converts the address part ``4444`` to its byte representation ``\xff``:
+Holds some generic methods. Most of them handles conversion of FS20 addresses and times. The following example converts the address part ``4444`` to its byte representation ``\xff``:
 ``` python
 import fs20
 
