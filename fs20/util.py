@@ -54,13 +54,14 @@ def address_to_byte(address):
         InvalidInput: If the given address is invalid.
     """
     address = str(address).split('-')
-    if 3 == len(address):
-        if (is_valid_address_part(address[0]) and
-            is_valid_address_part(address[1]) and
-            is_valid_address_part(address[2])):
-            return (address_part_to_byte(address[0]) +
-                    address_part_to_byte(address[1]) +
-                    address_part_to_byte(address[2]))
+    if (3 == len(address)                 and
+        is_valid_address_part(address[0]) and
+        is_valid_address_part(address[1]) and
+        is_valid_address_part(address[2])):
+        return ( address_part_to_byte(address[0])
+               + address_part_to_byte(address[1])
+               + address_part_to_byte(address[2])
+               )
     raise InvalidInput('Invalid address given (e.g. "1234-1234-1234" expected).')
 
 def byte_to_address(value):

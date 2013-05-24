@@ -212,7 +212,8 @@ class PCS:
                           + self._get_raw_address(address)
                           + self._get_raw_command(command)
                           + self._get_raw_interval(interval)
-                          , False)[0]
+                          , False
+                          )[0]
 
     def send_once(self, address, command):
         """
@@ -228,7 +229,8 @@ class PCS:
         """
         return self._write( DATAFRAME_SEND_ONCE
                           + self._get_raw_address(address)
-                          + self._get_raw_command(command))[0]
+                          + self._get_raw_command(command)
+                          )[0]
 
     def stop_multiple_sending(self):
         """
