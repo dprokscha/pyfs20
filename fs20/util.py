@@ -33,41 +33,11 @@ def address_part_to_byte(part):
         >>> address_part_to_byte('4444')
         '\xff'
     """
-    return chr(address_part_to_int(part))
-
-def address_part_to_hex(part):
-    """
-    Converts an address part to it's hexadecimal value.
-
-    Args:
-        part: String or integer which represents an address part.
-
-    Returns:
-        >>> address_part_to_hex(1111)
-        0x0
-        >>> address_part_to_hex('4444')
-        0xff
-    """
-    return hex(address_part_to_int(part))
-
-def address_part_to_int(part):
-    """
-    Converts an address part to it's integer value.
-
-    Args:
-        part: String or integer which represents an address part.
-
-    Returns:
-        >>> address_part_to_int(1111)
-        0x0
-        >>> address_part_to_int('4444')
-        0xff
-    """
     int_value = 0;
-    for key_code in str(part):
+    for str_value in str(part):
         int_value <<= 2
-        int_value += int(key_code) - 1
-    return int_value
+        int_value += int(str_value) - 1
+    return chr(int_value)
 
 def address_to_byte(address):
     """
@@ -126,39 +96,9 @@ def byte_to_address_part(value):
         >>> byte_to_address_part('\xff')
         '4444'
     """
-    return int_to_address_part(ord(value))
-
-def hex_to_address_part(value):
-    """
-    Converts a hexadecimal value to an address part.
-
-    Args:
-        value: Hexadecimal value.
-
-    Returns:
-        >>> hex_to_address_part(0x0)
-        '1111'
-        >>> hex_to_address_part(0xff)
-        '4444'
-    """
-    return int_to_address_part(int(value))
-
-def int_to_address_part(value):
-    """
-    Converts an integer value to an address part.
-
-    Args:
-        value: Integer value.
-
-    Returns:
-        >>> int_to_address_part(0)
-        '1111'
-        >>> int_to_address_part(255)
-        '4444'
-    """
     address_part = ''
-    for i in range(3, -1, -1):
-        address_part += str(((value >> i * 2) & 0x03) + 1)
+    for i in [3, 2, 1, 0]:
+        address_part += str(((ord(value) >> i * 2) & 0x03) + 1)
     return address_part
 
 def is_valid_address_part(part):
