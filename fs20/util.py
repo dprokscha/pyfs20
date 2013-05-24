@@ -20,6 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from datetime import datetime
+from math import log
+from math import floor
+
+
 def address_part_to_byte(part):
     """
     Converts an address part to a byte string.
@@ -102,6 +107,51 @@ def byte_to_address_part(value):
         address_part += str(((ord(value) >> i * 2) & 0x03) + 1)
     return address_part
 
+def byte_to_time_string(value):
+    """
+    Converts a byte string to a time string (%H:%M:%S.%f).
+
+    Args:
+        value: Byte string.
+
+    Returns:
+        >>> byte_to_time_string('\x01')
+        '00:00:0.250'
+        >>> byte_to_time_string('\xcf')
+        '04:16:0.000'
+    """
+    seconds = 2**(ord(value) >> 4) * (ord(value) & 0x0f) * 0.25
+    hours = seconds / 3600
+    seconds %= 3600
+    minutes = seconds / 60
+    seconds %= 60
+    return '%02i:%02i:%.3f' % (hours, minutes, seconds)
+
+def datetime_to_seconds(datetime):
+    """
+    Converts a datetime object to a value of seconds which is compatible with FS20.
+
+    Args:
+        datetime: Python datetime object.
+
+    Returns:
+        >>> datetime_to_seconds(datetime.strptime('01:20:12.350', '%H:%M:%S.%f'))
+        4812.250
+    """
+    seconds = ( datetime.hour   * 3600
+              + datetime.minute * 60
+              + datetime.second
+              + float(datetime.microsecond) / 10**6
+              )
+    offset = 0.25 - (seconds % 0.25)
+    if 0.25 == offset:
+        offset = 0
+    if 0.125 > offset:
+        seconds += offset
+    else:
+        seconds -= seconds % 0.25
+    return seconds
+
 def is_valid_address_part(part):
     """
     Returns TRUE if the given address part is a valid FS20 address part.
@@ -121,6 +171,28 @@ def is_valid_address_part(part):
                 return False
         return True
     return False
+
+def time_string_to_byte(time_string):
+    """
+    Converts a time string to a byte string.
+
+    Args:
+        time_string: A time string like "%H:%M:%S.%f" (between 250ms and 4h 16m).
+
+    Returns:
+        >>> time_string_to_byte('00:01:4.0')
+        '\x58'
+        >>> time_string_to_byte('04:16:0.0')
+        '\xcf'
+    """
+    seconds = datetime_to_seconds(datetime.strptime(time_string, '%H:%M:%S.%f'))
+    if not 0.25 <= seconds <= 15360.0:
+        raise InvalidInput('Only times between 250ms and 4h 16m are supported.')
+    high_nibble = int(floor(log(seconds, 2))) - 1
+    if 0 > high_nibble:
+        high_nibble = 0
+    low_nibble = int(seconds / (2**high_nibble * 0.25))
+    return chr((high_nibble << 4) + low_nibble)
 
 
 class InvalidInput(Exception):

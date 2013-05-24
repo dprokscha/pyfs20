@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 import unittest
 
 import environment
@@ -45,6 +46,22 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(util.byte_to_address_part('\xf0'), '4411')
         self.assertEqual(util.byte_to_address_part('\xff'), '4444')
 
+    def test_byte_to_time_string(self):
+        self.assertEqual(util.byte_to_time_string('\x01'), '00:00:0.250')
+        self.assertEqual(util.byte_to_time_string('\x0f'), '00:00:3.750')
+        self.assertEqual(util.byte_to_time_string('\x1b'), '00:00:5.500')
+        self.assertEqual(util.byte_to_time_string('\x2a'), '00:00:10.000')
+        self.assertEqual(util.byte_to_time_string('\x5e'), '00:01:52.000')
+        self.assertEqual(util.byte_to_time_string('\x99'), '00:19:12.000')
+        self.assertEqual(util.byte_to_time_string('\xaa'), '00:42:40.000')
+        self.assertEqual(util.byte_to_time_string('\xcf'), '04:16:0.000')
+
+    def test_datetime_to_seconds(self):
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:01:1.110', '%H:%M:%S.%f')), 61.0)
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:01:1.130', '%H:%M:%S.%f')), 61.25)
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:05:20.450', '%H:%M:%S.%f')), 320.5)
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('01:20:12.350', '%H:%M:%S.%f')), 4812.25)
+
     def test_is_valid_address_part(self):
         self.assertTrue(util.is_valid_address_part('1111'))
         self.assertTrue(util.is_valid_address_part(1111))
@@ -58,6 +75,18 @@ class TestUtil(unittest.TestCase):
         self.assertFalse(util.is_valid_address_part(11))
         self.assertFalse(util.is_valid_address_part('11122'))
         self.assertFalse(util.is_valid_address_part(11122))
+
+    def test_time_string_to_byte(self):
+        self.assertEqual(util.time_string_to_byte('00:00:0.250'), '\x01')
+        self.assertEqual(util.time_string_to_byte('00:00:3.750'), '\x0f')
+        self.assertEqual(util.time_string_to_byte('00:00:5.500'), '\x1b')
+        self.assertEqual(util.time_string_to_byte('00:00:10.000'), '\x2a')
+        self.assertEqual(util.time_string_to_byte('00:01:52.000'), '\x5e')
+        self.assertEqual(util.time_string_to_byte('00:19:12.000'), '\x99')
+        self.assertEqual(util.time_string_to_byte('00:42:40.000'), '\xaa')
+        self.assertEqual(util.time_string_to_byte('04:16:0.000'), '\xcf')
+        self.assertRaises(util.InvalidInput, util.time_string_to_byte, '00:00:0.100')
+        self.assertRaises(util.InvalidInput, util.time_string_to_byte, '04:16:5.000')
 
 
 def get_suite():
