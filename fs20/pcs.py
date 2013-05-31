@@ -153,7 +153,7 @@ class PCS:
             DeviceInvalidResponse: If FS20 PCS returns an invalid response.
         """
         try:
-            response = self._get_device().read(ENDPOINT_READ, 5, timeout=300)
+            response = self._get_device().read(ENDPOINT_READ, 5, timeout=500)
         except Exception:
             response = ''
         if response[0:3] == array('B', [0x02, 0x03, 0xa0]):
