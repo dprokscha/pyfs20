@@ -50,7 +50,7 @@ time = fs20.util.time_string_to_byte('00:00:2.0')
 pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
 
-pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME + time)
+pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME, time)
 ```
 
 ##### Util ([view source](fs20/util.py))
