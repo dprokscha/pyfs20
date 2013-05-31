@@ -195,13 +195,14 @@ class PCS:
         version = str(self._write(DATAFRAME_VERSION)[1])
         return 'v%s.%s' % (version[0], version[1])
 
-    def send_multiple(self, address, command, interval=1):
+    def send_multiple(self, address, command, time='\x00', interval=1):
         """
         Sends the given command multiple for the given address.
 
         Args:
             address: Byte string which represents a fully qualified address.
             command: Byte string which represents a fully qualified command.
+            time: Byte string which represents a fully qualified time.
             interval: Interval between 1 and 255 how often the command should be sent.
 
         Returns:
@@ -210,18 +211,19 @@ class PCS:
         """
         return self._write( DATAFRAME_SEND_MULTIPLE
                           + self._get_raw_address(address)
-                          + self._get_raw_command(command)
+                          + self._get_raw_command(command + time)
                           + self._get_raw_interval(interval)
                           , False
                           )[0]
 
-    def send_once(self, address, command):
+    def send_once(self, address, command, time='\x00'):
         """
         Sends the given command once for the given address.
 
         Args:
             address: Byte string which represents a fully qualified address.
             command: Byte string which represents a fully qualified command.
+            time: Byte string which represents a fully qualified time.
 
         Returns:
             >>> self.send('\x00\x00\x00', '\x10')
@@ -229,7 +231,7 @@ class PCS:
         """
         return self._write( DATAFRAME_SEND_ONCE
                           + self._get_raw_address(address)
-                          + self._get_raw_command(command)
+                          + self._get_raw_command(command + time)
                           )[0]
 
     def stop_multiple_sending(self):
