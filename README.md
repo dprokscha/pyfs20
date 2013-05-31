@@ -1,5 +1,5 @@
 # PyFS20
-Easy access to all your FS20 devices.
+Access all your FS20 devices easily with Python!
 
 ### Contents
 [What the...?](#what-the)  
