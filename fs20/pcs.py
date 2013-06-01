@@ -52,12 +52,12 @@ class PCS:
     Handles I/O of FS20 PCS.
     """
 
-    def _get_device(self):
+    def __get_device(self):
         """
         Returns FS20 PCS device instance.
 
         Returns:
-            >>> self._get_device()
+            >>> self.__get_device()
             <usb.core.Device object>
 
         Raises:
@@ -79,7 +79,7 @@ class PCS:
             pass
         return device
 
-    def _get_raw_address(self, address):
+    def __get_raw_address(self, address):
         """
         Returns a raw address.
 
@@ -87,7 +87,7 @@ class PCS:
             address: Byte string which represents a fully qualified address.
 
         Returns:
-            >>> self._get_raw_address('\xff\xff\xff')
+            >>> self.__get_raw_address('\xff\xff\xff')
             '\xff\xff\xff'
 
         Raises:
@@ -97,7 +97,7 @@ class PCS:
             return address
         raise InvalidInput('Invalid address given (3 bytes expected).')
 
-    def _get_raw_command(self, command):
+    def __get_raw_command(self, command):
         """
         Returns a raw command, which is always two bytes long.
 
@@ -105,9 +105,9 @@ class PCS:
             command: Byte string which represents a fully qualified command.
 
         Returns:
-            >>> self._get_raw_address('\x00\x00')
+            >>> self.__get_raw_address('\x00\x00')
             '\x00\x00'
-            >>> self._get_raw_address('\x01')
+            >>> self.__get_raw_address('\x01')
             '\x01\x00'
 
         Raises:
@@ -119,7 +119,7 @@ class PCS:
             return command + '\x00'
         raise InvalidInput('Invalid command given (1-2 bytes expected).')
 
-    def _get_raw_interval(self, interval):
+    def __get_raw_interval(self, interval):
         """
         Returns a raw interval.
 
@@ -127,7 +127,7 @@ class PCS:
             interval: Integer value which represents an interval.
 
         Returns:
-            >>> self._get_raw_interval(15)
+            >>> self.__get_raw_interval(15)
             '\x0f'
 
         Raises:
@@ -137,14 +137,14 @@ class PCS:
             return chr(int(interval))
         raise InvalidInput('Invalid interval given (1-255 expected).')
 
-    def _get_response(self):
+    def __get_response(self):
         """
         Returns the response of PCS FS20 (after sending commands).
 
         Returns:
-            >>> self._get_response()
+            >>> self.__get_response()
             '\x00\x00'
-            >>> self._get_response()
+            >>> self.__get_response()
             '\x01\x10'
 
         Raises:
@@ -153,7 +153,7 @@ class PCS:
             DeviceInvalidResponse: If FS20 PCS returns an invalid response.
         """
         try:
-            response = self._get_device().read(ENDPOINT_READ, 5, timeout=500)
+            response = self.__get_device().read(ENDPOINT_READ, 5, timeout=500)
         except Exception:
             response = ''
         if response[0:3] == array('B', [0x02, 0x03, 0xa0]):
@@ -168,7 +168,7 @@ class PCS:
                 raise DeviceDataframeMismatch('Device can not handle data frame.')
         raise DeviceInvalidResponse('Invalid response from device.')
 
-    def _write(self, dataframe, with_response=True):
+    def __write(self, dataframe, with_response=True):
         """
         Writes the given data frame to FS20 PCS.
 
@@ -179,9 +179,9 @@ class PCS:
         Returns:
             Depends from the given data frame.
         """
-        self._get_device().write(ENDPOINT_WRITE, dataframe)
+        self.__get_device().write(ENDPOINT_WRITE, dataframe)
         if with_response:
-            return self._get_response()
+            return self.__get_response()
         return array('B', [RESPONSE_OK, 0])
 
     def get_version(self):
@@ -192,7 +192,7 @@ class PCS:
             >>> self.get_version()
             'v1.7'
         """
-        version = str(self._write(DATAFRAME_VERSION)[1])
+        version = str(self.__write(DATAFRAME_VERSION)[1])
         return 'v%s.%s' % (version[0], version[1])
 
     def send_multiple(self, address, command, time='\x00', interval=1):
@@ -209,10 +209,10 @@ class PCS:
             >>> self.send_multiple('\x00\x00\x00', '\x10', 10)
             '\x00'
         """
-        return self._write( DATAFRAME_SEND_MULTIPLE
-                          + self._get_raw_address(address)
-                          + self._get_raw_command(command + time)
-                          + self._get_raw_interval(interval)
+        return self.__write( DATAFRAME_SEND_MULTIPLE
+                          + self.__get_raw_address(address)
+                          + self.__get_raw_command(command + time)
+                          + self.__get_raw_interval(interval)
                           , False
                           )[0]
 
@@ -229,9 +229,9 @@ class PCS:
             >>> self.send('\x00\x00\x00', '\x10')
             '\x00'
         """
-        return self._write( DATAFRAME_SEND_ONCE
-                          + self._get_raw_address(address)
-                          + self._get_raw_command(command + time)
+        return self.__write( DATAFRAME_SEND_ONCE
+                          + self.__get_raw_address(address)
+                          + self.__get_raw_command(command + time)
                           )[0]
 
     def stop_multiple_sending(self):
@@ -242,7 +242,7 @@ class PCS:
             >>> self.stop_multiple_sending()
             '\x04'
         """
-        return self._write(DATAFRAME_STOP_MULTIPLE_SENDING)[0]
+        return self.__write(DATAFRAME_STOP_MULTIPLE_SENDING)[0]
 
 
 class DeviceDataframeMismatch(Exception):
