@@ -177,7 +177,7 @@ def time_string_to_byte(time_string):
     Converts a time string to a byte string.
 
     Args:
-        time_string: A time string like "%H:%M:%S.%f" (between 250ms and 4h 16m).
+        time_string: A time string like "%H:%M:%S.%f" (between 0ms and 4h 16m).
 
     Returns:
         >>> time_string_to_byte('00:01:4.0')
@@ -189,7 +189,7 @@ def time_string_to_byte(time_string):
     if 0.0 == seconds:
         return '\x00'
     if not seconds <= 15360.0:
-        raise InvalidInput('Only times between 250ms and 4h 16m are supported.')
+        raise InvalidInput('Only times between 0ms and 4h 16m are supported.')
     high_nibble = int(floor(log(seconds, 2))) - 1
     if 0 > high_nibble:
         high_nibble = 0
