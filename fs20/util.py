@@ -146,7 +146,7 @@ def datetime_to_seconds(datetime):
     offset = 0.25 - (seconds % 0.25)
     if 0.25 == offset:
         offset = 0
-    if 0.125 > offset:
+    if 0.125 > offset or 0.250 > seconds:
         seconds += offset
     else:
         seconds -= seconds % 0.25
@@ -186,7 +186,9 @@ def time_string_to_byte(time_string):
         '\xcf'
     """
     seconds = datetime_to_seconds(datetime.strptime(time_string, '%H:%M:%S.%f'))
-    if not 0.25 <= seconds <= 15360.0:
+    if 0.0 == seconds:
+        return '\x00'
+    if not seconds <= 15360.0:
         raise InvalidInput('Only times between 250ms and 4h 16m are supported.')
     high_nibble = int(floor(log(seconds, 2))) - 1
     if 0 > high_nibble:

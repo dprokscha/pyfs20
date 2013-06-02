@@ -57,6 +57,8 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(util.byte_to_time_string('\xcf'), '04:16:0.000')
 
     def test_datetime_to_seconds(self):
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:00:0.000', '%H:%M:%S.%f')), 0.0)
+        self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:00:0.100', '%H:%M:%S.%f')), 0.25)
         self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:01:1.110', '%H:%M:%S.%f')), 61.0)
         self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:01:1.130', '%H:%M:%S.%f')), 61.25)
         self.assertEqual(util.datetime_to_seconds(datetime.strptime('00:05:20.450', '%H:%M:%S.%f')), 320.5)
@@ -77,6 +79,8 @@ class TestUtil(unittest.TestCase):
         self.assertFalse(util.is_valid_address_part(11122))
 
     def test_time_string_to_byte(self):
+        self.assertEqual(util.time_string_to_byte('00:00:0.000'), '\x00')
+        self.assertEqual(util.time_string_to_byte('00:00:0.100'), '\x01')
         self.assertEqual(util.time_string_to_byte('00:00:0.250'), '\x01')
         self.assertEqual(util.time_string_to_byte('00:00:3.750'), '\x0f')
         self.assertEqual(util.time_string_to_byte('00:00:5.500'), '\x1b')
@@ -85,7 +89,6 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(util.time_string_to_byte('00:19:12.000'), '\x99')
         self.assertEqual(util.time_string_to_byte('00:42:40.000'), '\xaa')
         self.assertEqual(util.time_string_to_byte('04:16:0.000'), '\xcf')
-        self.assertRaises(util.InvalidInput, util.time_string_to_byte, '00:00:0.100')
         self.assertRaises(util.InvalidInput, util.time_string_to_byte, '04:16:5.000')
 
 
