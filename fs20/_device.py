@@ -62,12 +62,14 @@ class Device:
             """
             if self.blocked:
                 raise DeviceBlocked('Device is currently blocked.')
-            if 1 < interval:
+            if interval is 1:
+                print 'send_once'
                 response = self._pcs.send_once( address=self.address
                                               , command=self.callables[name]['command']
                                               , time=util.time_string_to_byte(time_string)
                                               )
             else:
+                print 'send_multiple'
                 response = self._pcs.send_multiple( address=self.address
                                                   , command=self.callables[name]['command']
                                                   , time=util.time_string_to_byte(time_string)
