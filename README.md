@@ -10,7 +10,8 @@ Control all your FS20 devices easily with Python!
 ....[Dimmer](#dimmer-view-source)  
 ....[PCS](#pcs-view-source)  
 ....[Switch](#switch-view-source)  
-....[Util](#util-view-source)
+....[Util](#util-view-source)__
+[Testing](#testing)
 
 ### What the...?
 Are you asking yourself what the hell FS20 is? FS20 is a simple but unsecure, unidirectional radio home automation system by [ELV](http://www.elv.de/fs20-funkschaltsystem.html) and it is one of the cheapest systems to control your electrical devices (e.g. lights, shutters, ...) remotely. There are many actors and sensors available. With the USB devices [FS20 PCE](http://www.elv.de/output/controller.aspx?cid=74&detail=10&detail2=41481) (receiver) and [FS20 PCS](http://www.elv.de/output/controller.aspx?cid=74&detail=10&detail2=29530) (transmitter) it is possible to communicate to each FS20 device via your home computer. PyFS20 is a python package which allows an easy access to all this FS20 components. Build up your own programs to control your FS20 system remotely!
@@ -87,4 +88,15 @@ Holds some generic methods. Most of them handles conversion of FS20 addresses an
 import fs20
 
 print fs20.util.address_part_to_byte('4444')
+```
+
+### Testing
+To run all tests properly it is required to connect [FS20 PCS](http://www.elv.de/output/controller.aspx?cid=74&detail=10&detail2=29530) and [FS20 PCE](http://www.elv.de/output/controller.aspx?cid=74&detail=10&detail2=41481) with the machine you run the tests from. Otherwise the tests will crash. To run the tests, simply execute following commands within your shell:
+
+``` bash
+# Run all tests
+cd tests && python runall.py
+
+# Run a suite
+cd tests && python test_util.py
 ```
