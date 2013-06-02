@@ -79,7 +79,7 @@ class Device:
         Args:
             command: Byte string which represents a fully qualified command.
             status: The new device status (brightness level 0-100 or "None" for unknown).
-            time: A time string like "%H:%M:%S.%f" (between 0ms and 4h 16m).
+            time_string: A time string like "%H:%M:%S.%f" (between 0ms and 4h 16m).
             interval: Interval between 1 and 255 how often the command should be sent.
 
         Returns:
