@@ -7,7 +7,9 @@ Control all your FS20 devices easily with Python!
 [Installing PyFS20](#installing-pyfs20)  
 [Modules](#modules)  
 ....[Command](#command-view-source)  
+....[Dimmer](#dimmer-view-source)  
 ....[PCS](#pcs-view-source)  
+....[Switch](#switch-view-source)  
 ....[Util](#util-view-source)
 
 ### What the...?
@@ -38,6 +40,19 @@ import fs20
 print fs20.command.ON
 ```
 
+##### Dimmer ([view source](fs20/dimmer.py))
+``Dimmer`` is an abstraction layer for all FS20 dimmer devices. It allows sending commands without writing tons of code. Instantiated once, it remembers the current device status (brightness level 0-100 or ``None`` for unknown; depends from the executed command!) and allows to block the device for further commands (the instance can't execute further commands while it is blocked). Please keep in mind that this abstraction layer possibly provides more or less commands as your dimmer device actually supports. The following example sends the command ``ON`` to the device address ``1234-1234-1111``, repeats ``DIM_DOWN`` one hundred times and dims to 100% in 4 minutes and 30 seconds:
+``` python
+from fs20.dimmer import Dimmer
+
+dimmer = Dimmer('1234-1234-1111')
+dimmer.on()
+
+dimmer.dim_down(interval=100)
+
+dimmer.dim_brightness_level_15_in_time(time_string='00:04:30.0')
+```
+
 ##### PCS ([view source](fs20/pcs.py))
 This module is a wrapper for FS20 PCS. With ``PCS`` you can send any command to any device. Following example sends the command ``OFF`` to the device address ``1234-1234-1111``:
 ``` python
@@ -51,6 +66,19 @@ pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
 
 pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME, time)
+```
+
+##### Switch ([view source](fs20/switch.py))
+``Switch`` is an abstraction layer for all FS20 switch devices. It allows sending commands without writing tons of code. Instantiated once, it remembers the current device status (brightness level 0-100 or ``None`` for unknown; depends from the executed command!) and allows to block the device for further commands (the instance can't execute further commands while it is blocked). Please keep in mind that this abstraction layer possibly provides more or less commands as your switch device actually supports. The following example sends the command ``ON`` to the device address ``1234-1234-1111``, repeats ``TOGGLE`` ten times and turns the device on for 1 hour and 54 minutes:
+``` python
+from fs20.switch import Switch
+
+switch = Switch('1234-1234-1111')
+switch.on()
+
+switch.toggle(interval=10)
+
+switch.on_for_time_then_off(time_string='01:54:0.0')
 ```
 
 ##### Util ([view source](fs20/util.py))
