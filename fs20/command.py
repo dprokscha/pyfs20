@@ -33,7 +33,7 @@ DIM_UP = '\x13'
 DIM = '\x15'
 # Can be used to educate an address (does not work for all FS20 devices).
 EDUCATE = '\x17'
- # Turn off.
+# Turn off.
 OFF = '\x00'
 # Turn off for internal time, then turn on to last brightness level.
 OFF_FOR_INTERNAL_TIME_THEN_LAST_BRIGHTNESS_LEVEL = '\x18'
