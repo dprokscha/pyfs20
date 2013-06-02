@@ -10,7 +10,7 @@ Control all your FS20 devices easily with Python!
 ....[Dimmer](#dimmer-view-source)  
 ....[PCS](#pcs-view-source)  
 ....[Switch](#switch-view-source)  
-....[Util](#util-view-source)__
+....[Util](#util-view-source)  
 [Testing](#testing)
 
 ### What the...?
