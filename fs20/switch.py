@@ -30,6 +30,9 @@ class Switch(Device):
     """
 
     callables = {
+        """
+        Single byte commands.
+        """
         'change_internal_timer': {
             'command': command.CHANGE_INTERNAL_TIMER,
             'status': None
@@ -78,6 +81,9 @@ class Switch(Device):
             'command': command.TOGGLE,
             'status': None
         },
+        """
+        Commands with additional byte.
+        """
         'off_for_time_then_last_brightness_level': {
             'command': command.OFF_FOR_TIME_THEN_LAST_BRIGHTNESS_LEVEL,
             'status': 100
