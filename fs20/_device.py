@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from functools import partial
+
 from fs20 import pcs
 from fs20 import util
 
@@ -47,36 +49,12 @@ class Device:
         Raises:
             UnknownCommand: If the given command does not exists.
         """
-        if not name in self.callables:
-            raise UnknownCommand('Command "%s" does not exists.' % (name))
-        def callable(time_string='00:00:0.0', interval=1):
-            """
-            Executes the command and returns the new device status on success.
-
-            Args:
-                time: A time string like "%H:%M:%S.%f" (between 0ms and 4h 16m).
-                interval: Interval between 1 and 255 how often the command should be sent.
-
-            Raises:
-                DeviceBlocked: If the device is currently blocked.
-            """
-            if self.blocked:
-                raise DeviceBlocked('Device is currently blocked.')
-            if interval is 1:
-                response = self._pcs.send_once( address=self.address
-                                              , command=self.callables[name]['command']
-                                              , time=util.time_string_to_byte(time_string)
-                                              )
-            else:
-                response = self._pcs.send_multiple( address=self.address
-                                                  , command=self.callables[name]['command']
-                                                  , time=util.time_string_to_byte(time_string)
-                                                  , interval=interval
-                                                  )
-            if pcs.RESPONSE_OK == response:
-                self.status = self.callables[name]['status']
-            return self.status
-        return callable
+        if name in self.callables:
+            return partial( self.callable
+                          , command=self.callables[name]['command']
+                          , status=self.callables[name]['status']
+                          )
+        raise UnknownCommand('Command "%s" does not exists.' % (name))
 
     def __init__(self, address = '1111-1111-1111'):
         """
@@ -89,6 +67,36 @@ class Device:
         self.address = util.address_to_byte(address)
         self.blocked = False
         self.status = 0
+
+    def callable(self, time_string='00:00:0.0', interval=1, command='\x00', status=None):
+        """
+        Executes the command and returns the new device status on success.
+
+        Args:
+            time: A time string like "%H:%M:%S.%f" (between 0ms and 4h 16m).
+            interval: Interval between 1 and 255 how often the command should be sent.
+            command: Byte string which represents a fully qualified command.
+            status: The new device status (brightness level 0-100 or "None" for unknown).
+
+        Raises:
+            DeviceBlocked: If the device is currently blocked.
+        """
+        if self.blocked:
+            raise DeviceBlocked('Device is currently blocked.')
+        if interval is 1:
+            response = self._pcs.send_once( address=self.address
+                                          , command=command
+                                          , time=util.time_string_to_byte(time_string)
+                                          )
+        else:
+            response = self._pcs.send_multiple( address=self.address
+                                              , command=command
+                                              , time=util.time_string_to_byte(time_string)
+                                              , interval=interval
+                                              )
+        if pcs.RESPONSE_OK == response:
+            self.status = status
+        return self.status
 
 
 class DeviceBlocked(Exception):
