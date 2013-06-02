@@ -26,17 +26,20 @@ PyFS20 - Control all your FS20 devices easily with Python!
 This package exports the following modules and subpackages:
 
     command - Holds all possible commands
+    dimmer  - Abstraction layer for all FS20 dimmer devices
     pcs     - Handler for device FS20:PCS (radio transmitter)
     switch  - Abstraction layer for all FS20 switch devices
     util    - Utility module
 """
 
 __all__ = ['command',
+           'dimmer',
            'pcs',
            'switch',
            'util']
 
 import fs20.command as command
+import fs20.dimmer as dimmer
 import fs20.pcs as pcs
 import fs20.switch as switch
 import fs20.util as util
