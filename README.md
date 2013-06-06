@@ -7,9 +7,8 @@ Control all your FS20 devices easily with Python!
 [Installing PyFS20](#installing-pyfs20)  
 [Modules](#modules)  
 ....[Command](#command-view-source)  
-....[Dimmer](#dimmer-view-source)  
+....[Device](#device-view-source)  
 ....[PCS](#pcs-view-source)  
-....[Switch](#switch-view-source)  
 ....[Util](#util-view-source)  
 [Testing](#testing)
 
@@ -41,10 +40,10 @@ import fs20
 print fs20.command.ON
 ```
 
-##### Dimmer ([view source](fs20/dimmer.py))
-``Dimmer`` is an abstraction layer for all FS20 dimmer devices. It allows sending commands without writing tons of code. Instantiated once, it remembers the current device status (brightness level 0-100 or ``None`` for unknown; depends from the executed command!) and allows to block the device for further commands (the instance can't execute further commands while it is blocked). Please keep in mind that this abstraction layer possibly provides more or less commands as your dimmer device actually supports. The following example sends the command ``ON`` to the device address ``1234-1234-1111``, repeats ``DIM_DOWN`` one hundred times and dims to 100% in 4 minutes and 30 seconds:
+##### Device ([view source](fs20/device.py))
+``Device`` is an abstraction layer for FS20 devices. It allows sending commands without writing tons of code. Instantiated once, it remembers the current device status (brightness level 0-100 or ``None`` for unknown; depends from the executed command!) and allows to block the device for further commands (the instance can't execute further commands while it is blocked). Please keep in mind that this abstraction layer possibly provides more or less commands as your device actually supports. Currently there are abstraction layers for dimmer and switch devices (``fs20.device.Dimmer`` and ``fs20.device.Switch``). For shutters, simply use dimmer - the commands are equal. The following example sends the command ``ON`` to the device address ``1234-1234-1111``, repeats ``DIM_DOWN`` one hundred times and dims to 100% in 4 minutes and 30 seconds:
 ``` python
-from fs20.dimmer import Dimmer
+from fs20.device import Dimmer
 
 dimmer = Dimmer('1234-1234-1111')
 dimmer.on()
@@ -67,19 +66,6 @@ pcs = PCS()
 pcs.send_once(address, fs20.command.OFF)
 
 pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME, time)
-```
-
-##### Switch ([view source](fs20/switch.py))
-``Switch`` is an abstraction layer for all FS20 switch devices. It allows sending commands without writing tons of code. Instantiated once, it remembers the current device status (brightness level 0-100 or ``None`` for unknown; depends from the executed command!) and allows to block the device for further commands (the instance can't execute further commands while it is blocked). Please keep in mind that this abstraction layer possibly provides more or less commands as your switch device actually supports. The following example sends the command ``ON`` to the device address ``1234-1234-1111``, repeats ``TOGGLE`` ten times and turns the device on for 1 hour and 54 minutes:
-``` python
-from fs20.switch import Switch
-
-switch = Switch('1234-1234-1111')
-switch.on()
-
-switch.toggle(interval=10)
-
-switch.on_for_time_then_off(time_string='01:54:0.0')
 ```
 
 ##### Util ([view source](fs20/util.py))
