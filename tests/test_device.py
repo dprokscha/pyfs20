@@ -6,7 +6,7 @@ import unittest
 import environment
 import fs20
 from fs20.pcs import PCS
-from fs20.switch import Switch
+from fs20.device import Switch
 
 
 class TestDevice(unittest.TestCase):
@@ -26,12 +26,12 @@ class TestDevice(unittest.TestCase):
     def test_callable_blocked(self):
         self.assertEqual(self._switch.on(), 100)
         self._switch.blocked = True
-        self.assertRaises(fs20._device.DeviceBlocked, self._switch.on)
+        self.assertRaises(fs20.device.DeviceBlocked, self._switch.on)
 
     def test_callable_unknown(self):
         def unknown_command():
             self._switch.foobar()
-        self.assertRaises(fs20._device.UnknownCommand, unknown_command)
+        self.assertRaises(fs20.device.UnknownCommand, unknown_command)
 
 
 def get_suite():
