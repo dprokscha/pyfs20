@@ -245,6 +245,7 @@ class PCS:
         return self._write(DATAFRAME_STOP_MULTIPLE_SENDING)[0]
 
 
+# Module exceptions.
 class DeviceDataframeMismatch(Exception):
     pass
 

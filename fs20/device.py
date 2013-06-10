@@ -454,6 +454,7 @@ class Switch(Device):
     }
 
 
+# Module exceptions.
 class DeviceBlocked(Exception):
     pass
 

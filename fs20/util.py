@@ -197,5 +197,6 @@ def time_string_to_byte(time_string):
     return chr((high_nibble << 4) + low_nibble)
 
 
+# Module exceptions.
 class InvalidInput(Exception):
     pass
