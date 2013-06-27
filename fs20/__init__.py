@@ -27,16 +27,19 @@ This package exports the following modules and subpackages:
 
     command - Holds all possible FS20 commands
     device  - Abstraction layer for FS20 devices
-    pcs     - Handler for device FS20:PCS (radio transmitter)
+    pce     - Handler for device FS20 PCE (receiver)
+    pcs     - Handler for device FS20 PCS (transmitter)
     util    - Utility module
 """
 
 __all__ = ['command',
            'device',
+           'pce',
            'pcs',
            'util']
 
 import fs20.command as command
 import fs20.device as device
+import fs20.pce as pce
 import fs20.pcs as pcs
 import fs20.util as util
