@@ -139,7 +139,7 @@ class PCS:
 
     def _get_response(self):
         """
-        Returns the response of PCS FS20 (after sending commands).
+        Returns the response of FS20 PCS (after sending commands).
 
         Returns:
             >>> self._get_response()
