@@ -465,7 +465,7 @@ class Response:
         else:
             self.command = Response.commands[command]['without_time']['command']
             self.name = Response.commands[command]['without_time']['name']
-            self.time = 0.0
+            self.time = None
 
     def __str__(self):
         """
