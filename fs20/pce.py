@@ -116,6 +116,8 @@ class Response:
     Attributes:
         address: String which represents a fully qualified address (response target).
         command: Byte string which represents a fully qualified command.
+        commands: A dictionary which holds a hash table for command translation.
+        name: String which represents the command name.
         time: Float value which represents the execution time for the command (seconds).
     """
 
@@ -443,6 +445,12 @@ class Response:
     }
 
     def __init__(self, response):
+        """
+        Initializes the response instance.
+
+        Args:
+            reponse: Byte string which holds the raw response of FS20 PCE (see fs20.PCE.get_response()).
+        """
         self.address = '%s-%s-%s' % ( hexlify(response[0:2])
                                     , hexlify(response[2:4])
                                     , hexlify(response[4:6])
@@ -460,6 +468,13 @@ class Response:
             self.time = 0.0
 
     def __str__(self):
+        """
+        Makes the response readable.
+
+        Returns:
+            >>> print self
+            'Address: 1111-1111-1111', Command: ON, Time: 0.0
+        """
         return 'Address: %s, Command: %s, Time: %s' % ( self.address
                                                       , self.name
                                                       , self.time
