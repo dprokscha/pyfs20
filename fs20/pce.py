@@ -123,231 +123,231 @@ class Response:
         0: {
             'with_time': {
                 'command': command.DIM_OFF_IN_TIME,
-                'name': 'dim_off_in_time'
+                'name': 'DIM_OFF_IN_TIME'
             },
             'without_time': {
                 'command': command.OFF,
-                'name': 'off'
+                'name': 'OFF'
             }
         },
         1: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_1_IN_TIME,
-                'name': 'dim_brightness_level_1_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_1_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_1,
-                'name': 'on_brightness_level_1'
+                'name': 'ON_BRIGHTNESS_LEVEL_1'
             }
         },
         2: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_2_IN_TIME,
-                'name': 'dim_brightness_level_2_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_2_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_2,
-                'name': 'on_brightness_level_2'
+                'name': 'ON_BRIGHTNESS_LEVEL_2'
             }
         },
         3: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_3_IN_TIME,
-                'name': 'dim_brightness_level_3_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_3_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_3,
-                'name': 'on_brightness_level_3'
+                'name': 'ON_BRIGHTNESS_LEVEL_3'
             }
         },
         4: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_4_IN_TIME,
-                'name': 'dim_brightness_level_4_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_4_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_4,
-                'name': 'on_brightness_level_4'
+                'name': 'ON_BRIGHTNESS_LEVEL_4'
             }
         },
         5: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_5_IN_TIME,
-                'name': 'dim_brightness_level_5_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_5_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_5,
-                'name': 'on_brightness_level_5'
+                'name': 'ON_BRIGHTNESS_LEVEL_5'
             }
         },
         6: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_6_IN_TIME,
-                'name': 'dim_brightness_level_6_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_6_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_6,
-                'name': 'on_brightness_level_6'
+                'name': 'ON_BRIGHTNESS_LEVEL_6'
             }
         },
         7: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_7_IN_TIME,
-                'name': 'dim_brightness_level_7_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_7_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_7,
-                'name': 'on_brightness_level_7'
+                'name': 'ON_BRIGHTNESS_LEVEL_7'
             }
         },
         8: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_8_IN_TIME,
-                'name': 'dim_brightness_level_8_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_8_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_8,
-                'name': 'on_brightness_level_8'
+                'name': 'ON_BRIGHTNESS_LEVEL_8'
             }
         },
         9: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_9_IN_TIME,
-                'name': 'dim_brightness_level_9_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_9_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_9,
-                'name': 'on_brightness_level_9'
+                'name': 'ON_BRIGHTNESS_LEVEL_9'
             }
         },
         10: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_10_IN_TIME,
-                'name': 'dim_brightness_level_10_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_10_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_10,
-                'name': 'on_brightness_level_10'
+                'name': 'ON_BRIGHTNESS_LEVEL_10'
             }
         },
         11: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_11_IN_TIME,
-                'name': 'dim_brightness_level_11_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_11_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_11,
-                'name': 'on_brightness_level_11'
+                'name': 'ON_BRIGHTNESS_LEVEL_11'
             }
         },
         12: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_12_IN_TIME,
-                'name': 'dim_brightness_level_12_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_12_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_12,
-                'name': 'on_brightness_level_12'
+                'name': 'ON_BRIGHTNESS_LEVEL_12'
             }
         },
         13: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_13_IN_TIME,
-                'name': 'dim_brightness_level_13_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_13_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_13,
-                'name': 'on_brightness_level_13'
+                'name': 'ON_BRIGHTNESS_LEVEL_13'
             }
         },
         14: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_14_IN_TIME,
-                'name': 'dim_brightness_level_14_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_14_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_14,
-                'name': 'on_brightness_level_14'
+                'name': 'ON_BRIGHTNESS_LEVEL_14'
             }
         },
         15: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_15_IN_TIME,
-                'name': 'dim_brightness_level_15_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_15_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_15,
-                'name': 'on_brightness_level_15'
+                'name': 'ON_BRIGHTNESS_LEVEL_15'
             }
         },
         16: {
             'with_time': {
                 'command': command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME,
-                'name': 'dim_brightness_level_16_in_time'
+                'name': 'DIM_BRIGHTNESS_LEVEL_16_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_BRIGHTNESS_LEVEL_16,
-                'name': 'on_brightness_level_16'
+                'name': 'ON_BRIGHTNESS_LEVEL_16'
             }
         },
         17: {
             'with_time': {
                 'command': command.DIM_LAST_BRIGHTNESS_LEVEL_IN_TIME,
-                'name': 'dim_last_brightness_level_in_time'
+                'name': 'DIM_LAST_BRIGHTNESS_LEVEL_IN_TIME'
             },
             'without_time': {
                 'command': command.ON_LAST_BRIGHTNESS_LEVEL,
-                'name': 'on_last_brightness_level'
+                'name': 'ON_LAST_BRIGHTNESS_LEVEL'
             }
         },
         18: {
             'with_time': {
                 'command': command.DIM_LAST_BRIGHTNESS_LEVEL_THEN_OFF_IN_TIME,
-                'name': 'dim_last_brightness_level_then_off_in_time'
+                'name': 'DIM_LAST_BRIGHTNESS_LEVEL_THEN_OFF_IN_TIME'
             },
             'without_time': {
                 'command': command.TOGGLE,
-                'name': 'toggle'
+                'name': 'TOGGLE'
             }
         },
         19: {
             'with_time': {
                 'command': command.DIM_UP_THEN_OFF_IN_TIME,
-                'name': 'dim_up_then_off_in_time'
+                'name': 'DIM_UP_THEN_OFF_IN_TIME'
             },
             'without_time': {
                 'command': command.DIM_UP,
-                'name': 'dim_up'
+                'name': 'DIM_UP'
             }
         },
         20: {
             'with_time': {
                 'command': command.DIM_DOWN_THEN_OFF_IN_TIME,
-                'name': 'dim_down_then_off_in_time'
+                'name': 'DIM_DOWN_THEN_OFF_IN_TIME'
             },
             'without_time': {
                 'command': command.DIM_DOWN,
-                'name': 'dim_down'
+                'name': 'DIM_DOWN'
             }
         },
         21: {
             'with_time': {
                 'command': command.DIM_THEN_OFF_IN_TIME,
-                'name': 'dim_then_off_in_time'
+                'name': 'DIM_THEN_OFF_IN_TIME'
             },
             'without_time': {
                 'command': command.DIM,
-                'name': 'dim'
+                'name': 'DIM'
             }
         },
         22: {
             'with_time': {
                 'command': command.SET_INTERNAL_TIMER,
-                'name': 'set_internal_timer'
+                'name': 'SET_INTERNAL_TIMER'
             },
             'without_time': {
                 'command': command.CHANGE_INTERNAL_TIMER,
-                'name': 'change_internal_timer'
+                'name': 'CHANGE_INTERNAL_TIMER'
             }
         },
         23: {
@@ -357,37 +357,37 @@ class Response:
             },
             'without_time': {
                 'command': command.EDUCATE,
-                'name': 'educate'
+                'name': 'EDUCATE'
             }
         },
         24: {
             'with_time': {
                 'command': command.OFF_FOR_TIME_THEN_LAST_BRIGHTNESS_LEVEL,
-                'name': 'off_for_time_then_last_brightness_level'
+                'name': 'OFF_FOR_TIME_THEN_LAST_BRIGHTNESS_LEVEL'
             },
             'without_time': {
                 'command': command.OFF_FOR_INTERNAL_TIME_THEN_LAST_BRIGHTNESS_LEVEL,
-                'name': 'off_for_internal_time_then_last_brightness_level'
+                'name': 'OFF_FOR_INTERNAL_TIME_THEN_LAST_BRIGHTNESS_LEVEL'
             }
         },
         25: {
             'with_time': {
                 'command': command.ON_FOR_TIME_THEN_OFF,
-                'name': 'on_for_time_then_off'
+                'name': 'ON_FOR_TIME_THEN_OFF'
             },
             'without_time': {
                 'command': command.ON_FOR_INTERNAL_TIME_THEN_OFF,
-                'name': 'on_for_internal_time_then_off'
+                'name': 'ON_FOR_INTERNAL_TIME_THEN_OFF'
             }
         },
         26: {
             'with_time': {
                 'command': command.ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF,
-                'name': 'on_for_time_last_brightness_level_then_off'
+                'name': 'ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF'
             },
             'without_time': {
                 'command': command.ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF,
-                'name': 'on_for_internal_time_last_brightness_level_then_off'
+                'name': 'ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_OFF'
             }
         },
         27: {
@@ -397,13 +397,13 @@ class Response:
             },
             'without_time': {
                 'command': command.RESET,
-                'name': 'reset'
+                'name': 'RESET'
             }
         },
         28: {
             'with_time': {
                 'command': command.SET_INTERNAL_TIMER_DIM_UP,
-                'name': 'set_internal_timer_dim_up'
+                'name': 'SET_INTERNAL_TIMER_DIM_UP'
             },
             'without_time': {
                 'command': None,
@@ -413,7 +413,7 @@ class Response:
         29: {
             'with_time': {
                 'command': command.SET_INTERNAL_TIMER_DIM_DOWN,
-                'name': 'set_internal_timer_dim_down'
+                'name': 'SET_INTERNAL_TIMER_DIM_DOWN'
             },
             'without_time': {
                 'command': None,
@@ -423,21 +423,21 @@ class Response:
         30: {
             'with_time': {
                 'command': command.ON_FOR_TIME_THEN_PREVIOUS_STATE,
-                'name': 'on_for_time_then_previous_state'
+                'name': 'ON_FOR_TIME_THEN_PREVIOUS_STATE'
             },
             'without_time': {
                 'command': command.ON_FOR_INTERNAL_TIME_THEN_PREVIOUS_STATE,
-                'name': 'on_for_internal_time_then_previous_state'
+                'name': 'ON_FOR_INTERNAL_TIME_THEN_PREVIOUS_STATE'
             }
         },
         31: {
             'with_time': {
                 'command': command.ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE,
-                'name': 'on_for_time_last_brightness_level_then_previous_state'
+                'name': 'ON_FOR_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE'
             },
             'without_time': {
                 'command': command.ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE,
-                'name': 'on_for_internal_time_last_brightness_level_then_previous_state'
+                'name': 'ON_FOR_INTERNAL_TIME_LAST_BRIGHTNESS_LEVEL_THEN_PREVIOUS_STATE'
             }
         }
     }
