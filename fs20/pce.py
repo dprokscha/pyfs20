@@ -455,7 +455,7 @@ class Response:
                                     , hexlify(response[2:4])
                                     , hexlify(response[4:6])
                                     )
-        self.name = 'unknown'
+        self.name = 'UNKNOWN'
         command = int(hexlify(response[6:7]))
         time = hexlify(response[7:10])
         if 1 == int(time[0]):
