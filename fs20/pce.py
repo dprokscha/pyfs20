@@ -447,16 +447,21 @@ class Response:
                                     , hexlify(response[2:4])
                                     , hexlify(response[4:6])
                                     )
-        self.command = hexlify(response[6:7])
-        self.time = hexlify(response[7:10])
-        if 1 == int(self.time[0]):
-            self.time = 0.25 * float(self.time[1:])
+        self.name = 'unknown'
+        command = int(hexlify(response[6:7]))
+        time = hexlify(response[7:10])
+        if 1 == int(time[0]):
+            self.command = Response.commands[command]['with_time']['command']
+            self.name = Response.commands[command]['with_time']['name']
+            self.time = 0.25 * float(time[1:])
         else:
+            self.command = Response.commands[command]['without_time']['command']
+            self.name = Response.commands[command]['without_time']['name']
             self.time = 0.0
 
     def __str__(self):
         return 'Address: %s, Command: %s, Time: %s' % ( self.address
-                                                      , self.command
+                                                      , self.name
                                                       , self.time
                                                       )
 
