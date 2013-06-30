@@ -194,6 +194,7 @@ class Response:
         command: Byte string which represents a fully qualified command.
         commands: A dictionary which holds a hash table for command translation.
         name: String which represents the command name.
+        response: Byte string which represents the raw response.
         time: Float value which represents the execution time for the command (seconds).
     """
 
@@ -527,6 +528,7 @@ class Response:
         Args:
             reponse: Byte string which holds the raw response of FS20 PCE (see fs20.PCE.get_response()).
         """
+        self.response = response
         self.address = '%s-%s-%s' % ( hexlify(response[0:2])
                                     , hexlify(response[2:4])
                                     , hexlify(response[4:6])
