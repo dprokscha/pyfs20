@@ -96,7 +96,7 @@ pcs.send_once(address, fs20.command.DIM_BRIGHTNESS_LEVEL_16_IN_TIME, time)
 ```
 
 ##### Util ([view source](fs20/util.py))
-Holds some generic methods. Most of them handles conversion of FS20 addresses and times. The following example converts the address part ``4444`` to its byte representation ``\xff``:
+``fs20.util`` holds some generic methods. Most of them handles conversion of FS20 addresses and times. The following example converts the address part ``4444`` to its byte representation ``\xff``:
 ``` python
 import fs20
 
