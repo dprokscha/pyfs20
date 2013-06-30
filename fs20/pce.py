@@ -22,6 +22,9 @@
 
 from array import array
 from binascii import hexlify
+from time import sleep
+import hashlib
+import threading
 
 import usb
 
@@ -107,6 +110,69 @@ class PCE:
             raise DeviceMissingResponse('Version only available after receiving commands.')
         version = str(PCE.version)
         return 'v%s.%s' % (version[0], version[1])
+
+
+class Receiver(threading.Thread):
+    """
+    Receives commands asynchronously.
+
+    Attributes:
+        callbacks: A dictionary which holds a hash table with callbacks.
+        interval: Float value of seconds after which time the receiver is checking for new received commands.
+        pce: Holds the instance of fs20.pce.PCE.
+        receiving: Boolean value is set to TRUE as long as the receiver is running.
+    """
+
+    def __init__(self):
+        """
+        Initializes the receiver instance.
+        """
+        threading.Thread.__init__(self)
+        self.callbacks = {}
+        self.daemon = True
+        self.interval = 0.15
+        self.pce = PCE()
+        self.receiving = True
+
+    def add_callback(self, callback, address=None, command=None):
+        """
+        Adds a new callback to the receiver.
+
+        Args:
+            callback: A callable which is called after a command was received.
+            address: String which represents a fully qualified address (callable will be only called if the response is for this address).
+            command: Byte string which represents a fully qualified command (callable will be only called if the response is for this command).
+        """
+        hash = hashlib.md5(str(address) + str(command)).hexdigest()
+        if hash not in self.callbacks:
+            self.callbacks[hash] = []
+        self.callbacks[hash].append(callback)
+
+    def run(self):
+        """
+        Waits for new responses and calls the associated callables.
+        """
+        while self.receiving:
+            try:
+                response = self.pce.get_response()
+                hashes = ( hashlib.md5(str(response.address) + str(response.command)).hexdigest()
+                         , hashlib.md5(str(response.address) + str(None)).hexdigest()
+                         , hashlib.md5(str(None) + str(response.command)).hexdigest()
+                         , hashlib.md5(str(None) + str(None)).hexdigest()
+                         )
+                for hash in hashes:
+                    if hash in self.callbacks:
+                        for callback in self.callbacks[hash]:
+                            callback(response=response)
+            except DeviceInvalidResponse:
+                pass
+            sleep(self.interval)
+
+    def stop(self):
+        """
+        Stops the receiver.
+        """
+        self.receiving = False
 
 
 class Response:
