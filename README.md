@@ -26,6 +26,7 @@ Simply do the following:
 * [Install Python 2.6 (or higher)](http://www.python.org/getit/)
 * [Install PyUSB](https://github.com/walac/pyusb)
 * [Download PyFS20](https://github.com/dprokscha/pyfs20/archive/master.zip)
+* Run ``python setup.py install``
 * Follow the code examples in this README
 
 Please note: I didn't tested this package with Python 3.0 (or higher).
