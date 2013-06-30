@@ -551,7 +551,7 @@ class Response:
 
         Returns:
             >>> print self
-            'Address: 1111-1111-1111', Command: ON, Time: 0.0
+            'Address: 1111-1111-1111', Command: ON, Time: None
         """
         return 'Address: %s, Command: %s, Time: %s' % ( self.address
                                                       , self.name
