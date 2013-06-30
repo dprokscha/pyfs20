@@ -111,6 +111,16 @@ class PCE:
         version = str(PCE.version)
         return 'v%s.%s' % (version[0], version[1])
 
+    def reset(self):
+        """
+        Clears the response buffer of FS20 PCE.
+        """
+        while True:
+            try:
+                self.get_response()
+            except DeviceInvalidResponse:
+                break
+
 
 class Receiver(threading.Thread):
     """
